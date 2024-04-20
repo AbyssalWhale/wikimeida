@@ -10,29 +10,31 @@ namespace wikimediatests.Tests.API
     public class Tests : TestsCoreFixtures
     {
         private SearchRoute SearchRoute;
+        private static string DefaultQueru = "furry rabbits";
+        private SearchPageResultModel PagesFromSearchResult;
 
         [SetUp]
         public async Task Setup()
         {
             SearchRoute = new SearchRoute(requestContext: PlaywrightRequest);
+
+            // WHEN - A search for pages containing for ‘furry rabbits’ is executed
+            var requestResponse = await SearchRoute.GetSearchPageResult(query: DefaultQueru);
+            requestResponse.StatusText.Should().Be(HttpStatusCode.OK.ToString());
+
+            var requestResponseBody = requestResponse.JsonAsync().Result;
+            requestResponseBody.Should().NotBeNull();
+            PagesFromSearchResult = requestResponseBody.Value.Deserialize<SearchPageResultModel>();
+            PagesFromSearchResult.Should().NotBeNull();
         }
 
         [Test]
-        [TestCase("furry rabbits", "Sesame Street")]
-        public async Task PageWithTitleCanBeFound(string query, string expectedPageToExist)
+        [TestCase("Sesame Street")]
+        public async Task PageWithTitleCanBeFound(string expectedPageToExist)
         {
-            // WHEN - A search for pages containing for ‘furry rabbits’ is executed
-            var requestResponse = await SearchRoute.GetSearchPageResult(query: query);
-            requestResponse.StatusText.Should().Be(HttpStatusCode.OK.ToString());
-            var requestResponseBody = requestResponse.JsonAsync().Result;
-            requestResponseBody.Should().NotBeNull();
-            var responsePages = requestResponseBody.Value.Deserialize<SearchPageResultModel>();
-            responsePages.Should().NotBeNull();
-
             // THEN - A page with the title ‘Sesame Street’ is found
-            var isContainingPage = responsePages.pages.Any(p => p.title.Equals(expectedPageToExist));
+            var isContainingPage = PagesFromSearchResult.pages.Any(p => p.title.Equals(expectedPageToExist));
             isContainingPage.Should().BeTrue();
-
         }
     }
 }
