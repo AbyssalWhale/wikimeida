@@ -13,6 +13,7 @@ namespace wikimediatests.Tests.Fixtures
         [OneTimeSetUp]
         public async Task OneTimeSetup()
         {
+            // AKA GIVEN - A client of the API
             PlaywrightTests = await Playwright.CreateAsync();
             PlaywrightRequest = await PlaywrightTests.APIRequest.NewContextAsync(
                     new APIRequestNewContextOptions
