@@ -58,5 +58,13 @@ namespace wikimediatests.Tests.API
             DateTime.TryParse(expectedTimeStamp, out var pageExpectedTime);
             pageDetails.latest.timestamp.Should().BeAfter(pageExpectedTime);
         }
+
+        // Additional scenarious. Request type: GET Route: /core/v1/{project}/{language}/page/{title}/bare
+        // Scenario 3. Send GET request where page title is LOWER case to check end point case sensetive. Based on requirements;
+        // Scenario 4. Send GET request where page title is UPPER case to check end point case sensetive. Based on requirements;
+        // Scenario 5. Send GET request where page title has spaces instead of underscores. Example: use - 'Sesame Street' and not 'Sesame_Street'. Check how route handles spaces;
+        // Scenario 6. Send GET request where page title is SQL query to check basic vulnerability protection;
+        // Scenario 7. Send GET request where page title is unknown/not existed page to check if route returns '404 Not found' response code with body that page, with requested title, does not exist
+        // Scenario 8. Send GET request where page title is title of the page that was deleted. to check if route returns '404 Not found' response code with body that page, with requested title, does not exist
     }
 }
