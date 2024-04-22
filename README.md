@@ -18,6 +18,9 @@
 17. ![image](https://github.com/AbyssalWhale/wikimeida/assets/53709071/39291b9a-b83a-4b6c-bee4-854afb352cdf)
 18. ![image](https://github.com/AbyssalWhale/wikimeida/assets/53709071/825b60c5-a54f-4e9e-9e55-60e90ddaa175)
 
+# Video with how to run
+https://github.com/AbyssalWhale/wikimeida/assets/53709071/837ab966-00d5-498f-ad03-9d00f637eefe
+
 # Part 2
 My response can be found in file with path: wikimediatests/Tests/API/SearchTests.cs. Lines: 62-68
 ![image](https://github.com/AbyssalWhale/wikimeida/assets/53709071/53cfac83-2cf3-4c3c-be1e-8fefa8aa031a)
